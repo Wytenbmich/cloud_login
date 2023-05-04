@@ -2,30 +2,43 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>WAX Cloud Wallet Example</title>
+  <title>Auto-Racer</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>WAX Cloud Wallet Example</h1>
-  <button id="login" onclick="loginSwitch ()">` ~
-    `Login</button>
-    <button id="login" onclick="construct ()">` ~
-      `Construct</button>
-  <form id="transfer-form" class="d-none">
-    <div>
-      <label for="to">To:</label>
-      <input type="text" id="to" required>
+  <div class="content">
+    <div class="login-container">
+      <button id="login" onclick="loginSwitch()">Login</button>
     </div>
-    <div>
-      <label for="quantity">Quantity:</label>
-      <input type="text" id="quantity" required>
-    </div>
-    <div>
-      <label for="memo">Memo:</label>
-      <input type="text" id="memo" required>
-    </div>
-    <button id="submit">Submit</button>
-  </form>
-  <pre id="response" style="height:15vh;` ~ `background-color:#EEEEEE;overflow-y:scroll;"></pre>
+    
+    <h1>Auto-Racer</h1>
+    <form>
+      <label for="gear-selector">Select your gear:</label>
+      <input type="range" id="gear-selector" name="gear" min="0" max="4" value="4" value="4" oninput="updateSliderValue()">
+      <span id="gear-selector-value">4</span>
+
+      <br>
+
+      <label for="asset-ids">Asset Ids:</label><br>
+      <textarea id="asset-ids" name="assets" rows="4" placeholder="Enter comma-separated integers [123, 321, 12, 3333]"></textarea>
+      <label>
+        <br>
+        <input type="radio" name="fuel-or-wax" value="Fuel">
+        Fuel
+      </label>
+      <label>
+        <input type="radio" name="fuel-or-wax" value="Wax">
+        Wax
+      </label>
+      <div class="note">
+        Note <br>
+        Autoracer take a small fee of 1% the fuel cost per transaction and can be made in wax/fuel
+      </div>
+    </form>
+    <button id="race" onclick="race()">Race!</button>
+    <pre id="response"></pre>
+  </div>
   <script src="waxjs.js"></script>
   <script src="app.js"></script>
 </body>
