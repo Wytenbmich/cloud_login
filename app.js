@@ -154,11 +154,14 @@ async function race (elem) {
 				blocksBehind: 60,
 				expireSeconds: 300
 			});
-
-			console.log("race successful")
 			console.log(race_result)
+			try {
+				console.log(race_result[transaction_id])
+			} catch (e) {
+				doLog ('Racing: ' + e.message);
+			}
 
-			break;
+			await delay (1000);
 		} catch (e) {
 				doLog ('Racing: ' + e.message);
 				await delay (1000);
