@@ -18,19 +18,27 @@
       <input type="range" id="gear-selector" name="gear" min="0" max="4" value="4" value="4" oninput="updateSliderValue()">
       <span id="gear-selector-value">4</span>
 
+      <label>
+        <br>
+        <input type="radio" name="rank" value="Rookie" checked>
+        Rookie
+      </label>
+      <label>
+        <input type="radio" name="rank" value="Intermediate">
+        Intermediate
+      </label>
+      <label>
+        <input type="radio" name="rank" value="Veteren">
+        Veteren
+      </label>
+      <label>
+        <input type="radio" name="rank" value="Master">
+        Master
+      </label>
       <br>
 
       <label for="asset-ids">Asset Ids:</label><br>
-      <textarea id="asset-ids" name="assets" rows="4" placeholder="Enter comma-separated integers [123, 321, 12, 3333]"></textarea>
-      <label>
-        <br>
-        <input type="radio" name="fuel-or-wax" value="Fuel">
-        Fuel
-      </label>
-      <label>
-        <input type="radio" name="fuel-or-wax" value="Wax">
-        Wax
-      </label>
+      <textarea id="asset-ids" name="assets" rows="4" placeholder="Enter comma-separated integers no brackets of the asset ids of the asset you wish to race with. It should be in the order of vech, driver driver, vechicle, driver, driver 12341233, 421341, 123412"></textarea>
       <div class="note">
         Note <br>
         Autoracer take a small fee of 1% the fuel cost per transaction and can be made in wax/fuel
@@ -41,5 +49,6 @@
   </div>
   <script src="waxjs.js"></script>
   <script src="app.js"></script>
+  <script src="const.js"></script>
 </body>
 </html>
