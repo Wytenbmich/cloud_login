@@ -102,9 +102,9 @@ async function race () {
 				console.log(race_result)
 				try {
 					console.log(race_result['transaction_id'])
+					count += 1
 					doLog ('Race Successfull')
 					document.getElementById("race-count").innerHTML = count
-					count += 1
 				} catch (e) {
 					doLog ('Racing: ' + e.message);
 				}
