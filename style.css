@@ -6,6 +6,7 @@ body {
     height: 100vh;
     background: linear-gradient(to bottom, #efefef, #eaecff);
     font-family: 'Poppins', sans-serif;
+    text-transform: lowercase;
   }
   
 h1 {
@@ -17,7 +18,7 @@ h1 {
 button {
     padding: 0.5em;
     font-size: 1.2em;
-    background-color: #4CAF50;
+    background-color: #5894f5;
     color: white;
     border: none;
     border-radius: 3px;
@@ -25,7 +26,7 @@ button {
 }
 
 button:hover {
-    background-color: #3E8E41;
+    background-color: #1bba1f;
 }
 
 .form-group {
@@ -52,32 +53,12 @@ input[type="text"] {
     width: 30%;
     box-sizing: border-box;
 }
-
-input[type="submit"] {
-    padding: 0.5em;
-    font-size: 1.2em;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: #3E8E41;
-}
-
   
 .button-container {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
-#login {
-    margin-right: 20px;
-}
 
 
 .login-container {
@@ -108,9 +89,10 @@ input[type="submit"]:hover {
   }
   
   #asset-ids {
-    width: 400px;
+    width: 100%;
+    min-width: 25vw;
     height: 200px;
-    resize: none;
+    resize: auto;
   }
 
   .content {
@@ -118,11 +100,20 @@ input[type="submit"]:hover {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border-radius: 20px;
-    width: 25%; /* Could be more or less, depending on screen size */
+    width: min-content; /* Could be more or less, depending on screen size */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
   }
 
   .note {
     opacity: 0.4;
     font-size: 13px;
   }
+
+.rocket-dog{
+  width: 50px;
+  height: 50px;
+  top: 30px;
+  left: 30px;
+  position: absolute;
+}
