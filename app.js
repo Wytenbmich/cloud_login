@@ -103,7 +103,10 @@ async function race () {
 			const vech_1 = asset_ids[i];
 			const driver_1 = asset_ids[i + 1];
 			const driver_2 = asset_ids[i + 2];
-
+			if(i%15 == 0) {
+				doLog("15 Racers reached this session, delaying 5 mins")
+				await delay (300000 + (getRandomInt(1, 5500)));
+			}
 			tx = getTransactions(commision_amount, pay_amount, vech_1, driver_1, driver_2, gear_level, use_boost)
 
 			try {
@@ -123,12 +126,12 @@ async function race () {
 				await delay (1000);
 			} catch (e) {
 					doLog ('Racing: ' + e.message);
-					await delay (1000);
+					await delay (1000 + (getRandomInt(1, 500)));
 			}
 		}
 		doLog ('Race successful!');
-		// Delay 5 mins before calling assets again
-		await delay (300000);
+		// Delay 5~ mins before calling assets again
+		await delay (300000 + (getRandomInt(1, 5500)));
 	}
 }
 
@@ -190,3 +193,9 @@ function getTransactions(commision_amount, pay_amount, vech_1, driver_1, driver_
 	}	
 	return transactions
 }
+
+function getRandomInt(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
