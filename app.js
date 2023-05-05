@@ -1,5 +1,6 @@
 const urlWax = 'https://wax.cryptolions.io';
 const wax = new waxjs.WaxJS ({rpcEndpoint: urlWax});
+let lineCount = 0;
 
 const delay = msecs => new Promise ((resolve, reject) => {
 	setTimeout (_ => resolve (), msecs)
@@ -30,6 +31,18 @@ async function login () {
 
 async function doLog (s) {
 	responseElement.append (s + '\n');
+
+	// increment the line count
+	lineCount++;
+
+	// if the line count is greater than 5, remove the first line
+	if (lineCount > 5) {
+	  // get the first child of the response element and remove it
+	  responseElement.removeChild(responseElement.firstChild);
+
+	  // decrement the line count
+	  lineCount--;
+	}
 }
 
 
