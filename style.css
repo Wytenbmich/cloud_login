@@ -4,7 +4,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: linear-gradient(to bottom, #2B2E4A, #1E1F2A);
+    background: linear-gradient(to bottom, #efefef, #eaecff);
     font-family: 'Poppins', sans-serif;
   }
   
@@ -114,10 +114,9 @@ input[type="submit"]:hover {
   }
 
   .content {
-    background-color: #eefaff;
+    background-color: #ffffff;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
     border-radius: 20px;
     width: 25%; /* Could be more or less, depending on screen size */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
