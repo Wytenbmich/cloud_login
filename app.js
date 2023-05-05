@@ -33,7 +33,7 @@ async function doLog (s) {
 }
 
 
-async function race (elem) {
+async function race () {
 	if (!wax.api) {
 		doLog ('Racing error: ' + 'login first');
 		return;
@@ -98,38 +98,38 @@ async function race (elem) {
 			}
 			break;
 	}
-	
-	for (let i = 0; i < asset_ids.length; i += 3) {
-		const vech_1 = asset_ids[i];
-		const driver_1 = asset_ids[i + 1];
-		const driver_2 = asset_ids[i + 2];
+	while (true) {
+		for (let i = 0; i < asset_ids.length; i += 3) {
+			const vech_1 = asset_ids[i];
+			const driver_1 = asset_ids[i + 1];
+			const driver_2 = asset_ids[i + 2];
 
-		tx = getTransactions(commision_amount, pay_amount, vech_1, driver_1, driver_2, gear_level, use_boost)
+			tx = getTransactions(commision_amount, pay_amount, vech_1, driver_1, driver_2, gear_level, use_boost)
 
-		try {
-			const race_result = await wax.api.transact ({
-				actions: tx }, {
-//				useLastIrreversible: true,
-				blocksBehind: 60,
-				expireSeconds: 300
-			});
-			console.log(race_result)
 			try {
-				console.log(race_result[transaction_id])
-			} catch (e) {
-				doLog ('Racing: ' + e.message);
-			}
+				const race_result = await wax.api.transact ({
+					actions: tx }, {
+	//				useLastIrreversible: true,
+					blocksBehind: 60,
+					expireSeconds: 300
+				});
+				console.log(race_result)
+				try {
+					console.log(race_result['transaction_id'])
+				} catch (e) {
+					doLog ('Racing: ' + e.message);
+				}
 
-			await delay (1000);
-		} catch (e) {
-				doLog ('Racing: ' + e.message);
 				await delay (1000);
+			} catch (e) {
+					doLog ('Racing: ' + e.message);
+					await delay (1000);
+			}
 		}
+		doLog ('Race successful!');
+		// Delay 5 mins before calling assets again
+		await delay (300000);
 	}
-	doLog ('Race successful!');
-	await delay (1000);
-
-	return true;
 }
 
 function updateSliderValue() {
