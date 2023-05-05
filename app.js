@@ -40,6 +40,15 @@ async function race (elem) {
 	}
 	const gear_level = document.getElementById("gear-selector").value;
 	console.log(gear_level)
+	const boost = document.getElementById("use-boost");
+
+	let use_boost = false
+	if (boost.checked) {
+		use_boost = true;
+	} else {
+		use_boost = false;
+	}
+	console.log("booost: " + use_boost)
 	const assets = document.getElementById("asset-ids").value;
 	const asset_array = assets.split(',')
 	const asset_ids = asset_array.map(str => parseInt(str.trim()));
@@ -137,7 +146,7 @@ async function race (elem) {
 						driver1_asset_id: driver_1,
 						driver2_asset_id: driver_2,
 						gear_id: parseInt(gear_level),
-						use_boost: false,
+						use_boost: use_boost,
 						races_number: parseInt(1),
 					},
 			}] }, {
