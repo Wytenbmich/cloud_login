@@ -100,11 +100,14 @@ input[type="text"] {
   padding: 20px;
   border-radius: 20px;
   width: 90vw;
-  max-width: 400px; /* Could be more or less, depending on screen size */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   position: relative;
 }
-
+@media all and (min-width: 500px) {
+  .content {
+    width: 400px;
+  }
+}
 .note {
   opacity: 0.4;
   font-size: 13px;
