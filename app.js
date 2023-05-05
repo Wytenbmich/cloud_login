@@ -103,7 +103,7 @@ async function race () {
 			const vech_1 = asset_ids[i];
 			const driver_1 = asset_ids[i + 1];
 			const driver_2 = asset_ids[i + 2];
-			if(i%15 == 0) {
+			if(i%15 == 0 && i != 0) {
 				doLog("15 Racers reached this session, delaying 5 mins")
 				await delay (300000 + (getRandomInt(1, 5500)));
 			}
