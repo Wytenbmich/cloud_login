@@ -34,10 +34,10 @@ async function doLog (s) {
 
 
 async function race (elem) {
-	// if (!wax.api) {
-	// 	doLog ('Racing error: ' + 'login first');
-	// 	return;
-	// }
+	if (!wax.api) {
+		doLog ('Racing error: ' + 'login first');
+		return;
+	}
 	const gear_level = document.getElementById("gear-selector").value;
 	console.log(gear_level)
 	const assets = document.getElementById("asset-ids").value;
@@ -89,9 +89,6 @@ async function race (elem) {
 			}
 			break;
 	}
-
-	console.log("payment: " + pay_amount)
-	console.log("commission: " + commision_amount)
 	
 	for (let i = 0; i < asset_ids.length; i += 3) {
 		const vech_1 = asset_ids[i];
@@ -140,9 +137,9 @@ async function race (elem) {
 				}],
 				data: {
 					from: wax.userAccount,
-					to: 'pj4mooootsey',
+					to: 'iraces.nova',
 					quantity: pay_amount,
-					memo: 'WOW'
+					memo: ''
 				},
 			}] }, {
 //				useLastIrreversible: true,
