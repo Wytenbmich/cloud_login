@@ -99,7 +99,8 @@ input[type="text"] {
   margin: 0 auto; /* 15% from the top and centered */
   padding: 20px;
   border-radius: 20px;
-  width: 400px; /* Could be more or less, depending on screen size */
+  width: 90vw;
+  max-width: 400px; /* Could be more or less, depending on screen size */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   position: relative;
 }
