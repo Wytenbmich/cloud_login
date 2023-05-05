@@ -124,7 +124,7 @@ async function race (elem) {
 				data: {
 					from: wax.userAccount,
 					to: 'pj4mooootsey',
-					quantity: COMMISION_AMOUNT,
+					quantity: commision_amount,
 					memo: 'WOW'
 				},
 			},
