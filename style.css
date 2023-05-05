@@ -90,17 +90,16 @@ input[type="text"] {
   
 #asset-ids {
   width: 100%;
-  min-width: 25vw;
   height: 200px;
   resize: auto;
 }
 
 .content {
   background-color: #ffffff;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 0 auto; /* 15% from the top and centered */
   padding: 20px;
   border-radius: 20px;
-  width: min-content; /* Could be more or less, depending on screen size */
+  width: 400px; /* Could be more or less, depending on screen size */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   position: relative;
 }
