@@ -71,7 +71,7 @@ async function race (elem) {
 				commision_amount = (INT_GAS_COST[gear_level] * 0.01).toString() + " SNAKGAS"
 			}
 			break;
-		case "Veteren":
+		case "Veteran":
 			pay_amount = (VET_MASTER_GAS_COST[gear_level]).toString() + " SNAKPOW"
 			
 			if (gear_level == 0) {

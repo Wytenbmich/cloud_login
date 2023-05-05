@@ -11,8 +11,8 @@
     <div class="login-container">
       <button id="login" onclick="loginSwitch()">Login</button>
     </div>
-    
     <h1>Auto-Racer</h1>
+    <img src="image.webp" class="rocket-dog">
     <form>
       <label for="gear-selector">Select your gear:</label>
       <input type="range" id="gear-selector" name="gear" min="0" max="4" value="4" value="4" oninput="updateSliderValue()">
@@ -28,8 +28,8 @@
         Intermediate
       </label>
       <label>
-        <input type="radio" name="rank" value="Veteren">
-        Veteren
+        <input type="radio" name="rank" value="Veteran">
+        Veteran
       </label>
       <label>
         <input type="radio" name="rank" value="Master">
@@ -38,10 +38,10 @@
       <br>
 
       <label for="asset-ids">Asset Ids:</label><br>
-      <textarea id="asset-ids" name="assets" rows="4" placeholder="Enter comma-separated integers no brackets of the asset ids of the asset you wish to race with. It should be in the order of vech, driver driver, vechicle, driver, driver 12341233, 421341, 123412"></textarea>
+      <textarea id="asset-ids" name="assets" rows="4" placeholder="eg. 12341233, 421341, 123412"></textarea>
       <div class="note">
-        Note <br>
-        Autoracer take a small fee of 1% the fuel cost per transaction and can be made in wax/fuel
+        Note: <br>
+        Autoracer takes a small fee of 1% of the fuel cost per transaction.
       </div>
     </form>
     <button id="race" onclick="race()">Race!</button>
