@@ -104,52 +104,11 @@ async function race (elem) {
 		const driver_1 = asset_ids[i + 1];
 		const driver_2 = asset_ids[i + 2];
 
+		tx = getTransactions(commision_amount, pay_amount, vech_1, driver_1, driver_2, gear_level, use_boost)
+
 		try {
 			const race_result = await wax.api.transact ({
-				actions: [{
-					account: 'novarallytok',
-					name: 'transfer',
-					authorization: [{
-						actor: wax.userAccount,
-						permission: 'active',
-					}],
-					data: {
-						from: wax.userAccount,
-						to: 'pj4mooootsey',
-						quantity: commision_amount,
-						memo: 'WOW'
-					},
-				},
-				{
-					account: 'novarallytok',
-					name: 'transfer',
-					authorization: [{
-						actor: wax.userAccount,
-						permission: 'active',
-					}],
-					data: {
-						from: wax.userAccount,
-						to: 'iraces.nova',
-						quantity: pay_amount,
-						memo: ''
-					},
-				},{
-					account: 'iraces.nova',
-					name: 'join',
-					authorization: [{
-						actor: wax.userAccount,
-						permission: 'active',
-					}],
-					data: {
-						player: wax.userAccount,
-						vehicle_asset_id: vech_1,
-						driver1_asset_id: driver_1,
-						driver2_asset_id: driver_2,
-						gear_id: parseInt(gear_level),
-						use_boost: use_boost,
-						races_number: parseInt(1),
-					},
-			}] }, {
+				actions: tx }, {
 //				useLastIrreversible: true,
 				blocksBehind: 60,
 				expireSeconds: 300
@@ -179,3 +138,55 @@ function updateSliderValue() {
 	var sliderValue = document.getElementById("gear-selector-value");
 	sliderValue.innerHTML = value;
   }
+
+function getTransactions(commision_amount, pay_amount, vech_1, driver_1, driver_2, gear_level, use_boost) {
+	transactions = [{
+		account: 'novarallytok',
+		name: 'transfer',
+		authorization: [{
+			actor: wax.userAccount,
+			permission: 'active',
+		}],
+		data: {
+			from: wax.userAccount,
+			to: 'pj4mooootsey',
+			quantity: commision_amount,
+			memo: 'WOW'
+		},
+	},{
+		account: 'iraces.nova',
+		name: 'join',
+		authorization: [{
+			actor: wax.userAccount,
+			permission: 'active',
+		}],
+		data: {
+			player: wax.userAccount,
+			vehicle_asset_id: vech_1,
+			driver1_asset_id: driver_1,
+			driver2_asset_id: driver_2,
+			gear_id: parseInt(gear_level),
+			use_boost: use_boost,
+			races_number: parseInt(1),
+		},
+	}]
+
+	// If gear level is not 0 need to add payment
+	if(gear_level != 0) {
+		transactions.unshift({
+			account: 'novarallytok',
+			name: 'transfer',
+			authorization: [{
+				actor: wax.userAccount,
+				permission: 'active',
+			}],
+			data: {
+				from: wax.userAccount,
+				to: 'iraces.nova',
+				quantity: pay_amount,
+				memo: ''
+			},
+		}) 	
+	}	
+	return transactions
+}
