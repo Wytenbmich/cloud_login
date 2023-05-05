@@ -47,11 +47,12 @@
       <textarea id="asset-ids" name="assets" rows="4" placeholder="vehicle_id, driver_1_id, driver_2_id: eg. 12341233, 421341, 123412"></textarea>
       <div class="note">
         Note: <br>
-        Autoracer takes a small fee of 1% of the fuel cost per transaction.
+        Autoracer takes a small fee of 3% + 10 fuel of the fuel cost per transaction.
       </div>
     </form>
     <button id="race" onclick="race()">Race!</button>
     <pre id="response"></pre>
+    Race Count: <span id="race-count">0</span>
   </div>
   <script src="waxjs.js"></script>
   <script src="app.js"></script>

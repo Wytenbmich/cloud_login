@@ -65,45 +65,28 @@ async function race () {
 	switch (rank) {
 		case "Rookie":
 			pay_amount = (ROOKIE_GAS_COST[gear_level]).toString() + " SNAKOIL"
-			
-			if (gear_level == 0) {
-				commision_amount = "300 SNAKOIL"
-			} else {
-				commision_amount = (ROOKIE_GAS_COST[gear_level] * 0.01).toString() + " SNAKOIL"
-			}
+			commision_amount = (ROOKIE_GAS_COST[gear_level] * 0.03 + 10).toString() + " SNAKOIL"
 			break;
 		case "Intermediate":
 			pay_amount = (INT_GAS_COST[gear_level]).toString() + " SNAKGAS"
-			if (gear_level == 0) {
-				commision_amount = "100 SNAKGAS"
-			} else {
-				commision_amount = (INT_GAS_COST[gear_level] * 0.01).toString() + " SNAKGAS"
-			}
+			commision_amount = (INT_GAS_COST[gear_level] * 0.03 + 10).toString() + " SNAKGAS"
 			break;
 		case "Veteran":
 			pay_amount = (VET_MASTER_GAS_COST[gear_level]).toString() + " SNAKPOW"
-			
-			if (gear_level == 0) {
-				commision_amount = "50 SNAKPOW"
-			} else {
-				commision_amount = (VET_MASTER_GAS_COST[gear_level] * 0.01).toString() + " SNAKPOW"
-			}
+			commision_amount = (VET_MASTER_GAS_COST[gear_level] * 0.03 + 10).toString() + " SNAKPOW"
 			break;
 		case "Master":
 			pay_amount = (VET_MASTER_GAS_COST[gear_level]).toString() + " SNAKVEN"
-			if (gear_level == 0) {
-				commision_amount = "50 SNAKVEN"
-			} else {
-				commision_amount = (VET_MASTER_GAS_COST[gear_level] * 0.01).toString() + " SNAKVEN"
-			}
+			commision_amount = (VET_MASTER_GAS_COST[gear_level] * 0.03 + 10).toString() + " SNAKVEN"
 			break;
 	}
 	while (true) {
+		let count = 0
 		for (let i = 0; i < asset_ids.length; i += 3) {
 			const vech_1 = asset_ids[i];
 			const driver_1 = asset_ids[i + 1];
 			const driver_2 = asset_ids[i + 2];
-			if(i%15 == 0 && i != 0) {
+			if(i%45 == 0 && i != 0) {
 				doLog("15 Racers reached this session, delaying 5 mins")
 				await delay (300000 + (getRandomInt(1, 5500)));
 			}
@@ -119,6 +102,9 @@ async function race () {
 				console.log(race_result)
 				try {
 					console.log(race_result['transaction_id'])
+					doLog ('Race Successfull')
+					document.getElementById("race-count").innerHTML = count
+					count += 1
 				} catch (e) {
 					doLog ('Racing: ' + e.message);
 				}
@@ -129,7 +115,8 @@ async function race () {
 					await delay (1000 + (getRandomInt(1, 500)));
 			}
 		}
-		doLog ('Race successful!');
+		doLog ('Finished racing all assets!');
+		doLog ('Waiting 5 for new races to start');
 		// Delay 5~ mins before calling assets again
 		await delay (300000 + (getRandomInt(1, 5500)));
 	}
