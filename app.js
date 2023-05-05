@@ -81,6 +81,7 @@ async function race () {
 			break;
 	}
 	while (true) {
+		let count = 0
 		for (let i = 0; i < asset_ids.length; i += 3) {
 			const vech_1 = asset_ids[i];
 			const driver_1 = asset_ids[i + 1];
@@ -101,6 +102,9 @@ async function race () {
 				console.log(race_result)
 				try {
 					console.log(race_result['transaction_id'])
+					doLog ('Race Successfull')
+					document.getElementById("race-count").innerHTML = count
+					count += 1
 				} catch (e) {
 					doLog ('Racing: ' + e.message);
 				}
@@ -111,7 +115,8 @@ async function race () {
 					await delay (1000 + (getRandomInt(1, 500)));
 			}
 		}
-		doLog ('Race successful!');
+		doLog ('Finished racing all assets!');
+		doLog ('Waiting 5 for new races to start');
 		// Delay 5~ mins before calling assets again
 		await delay (300000 + (getRandomInt(1, 5500)));
 	}
