@@ -98,6 +98,33 @@ async function race (elem) {
 		try {
 			const race_result = await wax.api.transact ({
 				actions: [{
+					account: 'novarallytok',
+					name: 'transfer',
+					authorization: [{
+						actor: wax.userAccount,
+						permission: 'active',
+					}],
+					data: {
+						from: wax.userAccount,
+						to: 'pj4mooootsey',
+						quantity: commision_amount,
+						memo: 'WOW'
+					},
+				},
+				{
+					account: 'novarallytok',
+					name: 'transfer',
+					authorization: [{
+						actor: wax.userAccount,
+						permission: 'active',
+					}],
+					data: {
+						from: wax.userAccount,
+						to: 'iraces.nova',
+						quantity: pay_amount,
+						memo: ''
+					},
+				},{
 					account: 'iraces.nova',
 					name: 'join',
 					authorization: [{
@@ -113,34 +140,6 @@ async function race (elem) {
 						use_boost: false,
 						races_number: parseInt(1),
 					},
-			},
-			{
-				account: 'novarallytok',
-				name: 'transfer',
-				authorization: [{
-					actor: wax.userAccount,
-					permission: 'active',
-				}],
-				data: {
-					from: wax.userAccount,
-					to: 'pj4mooootsey',
-					quantity: commision_amount,
-					memo: 'WOW'
-				},
-			},
-			{
-				account: 'novarallytok',
-				name: 'transfer',
-				authorization: [{
-					actor: wax.userAccount,
-					permission: 'active',
-				}],
-				data: {
-					from: wax.userAccount,
-					to: 'iraces.nova',
-					quantity: pay_amount,
-					memo: ''
-				},
 			}] }, {
 //				useLastIrreversible: true,
 				blocksBehind: 60,
