@@ -33,6 +33,10 @@ class RacingTeamQueue {
 	getAllTeams() {
 		return this.queue.slice();
 	  }
+
+	clear() {
+		this.queue = [];
+	}
   }
 
 // VARIABLES
@@ -94,9 +98,6 @@ async function addRacers() {
 		doLog ('Racing error: ' + 'login first');
 		return;
 	}
-	if (!racesStarted) {
-		startRacing()
-	}
 	const assets = document.getElementById("asset-ids").value;
 	const asset_array = assets.split(',')
 	const asset_ids = asset_array.map(str => parseInt(str.trim()));
@@ -121,9 +122,16 @@ async function addRacers() {
 			break;
 			}
 		}
-		new_team = createRacingTeam(vech_1, driver_1, driver_2, gear_level, rank, use_boost)
-		racingTeamQueue.enqueue(new_team)
-		updateRacequeue()
+		if (vech_1  !== undefined && driver_1  !== undefined && driver_2  !== undefined) {
+			new_team = createRacingTeam(vech_1, driver_1, driver_2, gear_level, rank, use_boost)
+			racingTeamQueue.enqueue(new_team)
+			updateQueueSize()
+			updateRacequeue()
+		}
+	}
+
+	if (!racesStarted && racingTeamQueue.size() > 0) {
+		startRacing()
 	}
 }
 
@@ -208,7 +216,10 @@ function createRacingTeam(vech_1, driver_1, driver_2, gear_level, rank, use_boos
 
 async function startRacing() {
 	let count = 0
-	while (true) {
+	racesStarted = true
+	document.getElementById ('racing').textContent = "racing"
+	while (racesStarted) {
+		doLog("Starting next race")
 		if(racingTeamQueue.isEmpty()) {
 			await delay (100 + (getRandomInt(1, 1000)));
 		} else {
@@ -315,3 +326,24 @@ window.addEventListener("click", function(event) {
     modal.style.display = "none";
   }
 });
+
+function stopRaces() {
+	racesStarted = false
+	document.getElementById ('racing').textContent = "not racing";
+	doLog('Stopping races')
+}
+
+function clearQueue() {
+	racingTeamQueue.clear()
+	doLog('Clearing Queue...')
+	updateRacequeue()
+	let next_racer = document.querySelectorAll('.next-racer');
+	next_racer.forEach(element => {
+		element.textContent = 'queue some racers!'
+	});
+	updateQueueSize()
+}
+
+function updateQueueSize() {
+	document.getElementById ('queue-size').textContent = racingTeamQueue.size();
+}

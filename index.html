@@ -53,12 +53,17 @@
       </div>
     </form>
     <button id="race" onclick="addRacers()">Race!</button>
+    <button class="button-stop" id="race" onclick="stopRaces()">Stop Races</button>
+    <br>
     <!-- Button to open the modal -->
-    <button onclick="openModal()">Open Modal</button>
+    <button onclick="openModal()">Open Queue</button>
+    <button class="button-stop" onclick="clearQueue()">clear Queue</button>
     <pre id="response"></pre>
     <span style="font-weight: bold;">Race Count:</span> <span id="race-count">0</span>
     <br>
     <span style="font-weight: bold;"> next racer: </span><span class="next-racer">queue some racers!</span>
+    <br>
+    <span id="racing">Not racing</span>, Queue size: <span id="queue-size">0</span>
     <!-- The modal -->
     <div id="myModal" class="modal">
       <!-- Modal content -->
