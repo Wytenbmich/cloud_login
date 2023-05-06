@@ -46,6 +46,7 @@ const wax = new waxjs.WaxJS ({rpcEndpoint: urlWax});
 let lineCount = 0;
 let racesStarted = false;
 const racingTeamQueue = new RacingTeamQueue();
+const error_count = 0;
 
 const delay = msecs => new Promise ((resolve, reject) => {
 	setTimeout (_ => resolve (), msecs)
@@ -255,7 +256,14 @@ async function startRacing() {
 				} catch (e) {
 						doLog ('Racing: ' + e.message);
 						doLog ('Waiting 45 seconds....');
-						await delay (45000 + (getRandomInt(1, 500)));
+						if (e == "assertion failure with message: the vehicle is already being used" || e == `assertion failure with message: vehicle asset id ${current_team.vech_1} has exhausted its free races for today.`) {
+							if (error_count%5 ==0) {
+								await delay (45000 + (getRandomInt(1, 1500)));
+							}
+							await delay (500 + (getRandomInt(1, 500)));
+						} else  {
+							await delay (45000 + (getRandomInt(1, 1500)));
+						}
 				}
 				racingTeamQueue.enqueue(current_team)
 				updateRacequeue()			
