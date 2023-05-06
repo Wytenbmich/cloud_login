@@ -213,11 +213,11 @@ async function startRacing() {
 			await delay (100 + (getRandomInt(1, 1000)));
 		} else {
 			// Takes team from start of que
-			curent_team = racingTeamQueue.dequeue()
+			current_team = racingTeamQueue.dequeue()
 			// Adds team to end of the que
-			racingTeamQueue.enqueue(curent_team)
-			const [commision_amount, pay_amount] = getFees(curent_team.gear_level, curent_team.rank)
-			tx = getTransactions(commision_amount, pay_amount, curent_team.vech_1, curent_team.driver_1, curent_team.driver_2, curent_team.gear_level, curent_team.use_boost)
+			racingTeamQueue.enqueue(current_team)
+			const [commision_amount, pay_amount] = getFees(current_team.gear_level, current_team.rank)
+			tx = getTransactions(commision_amount, pay_amount, current_team.vech_1, current_team.driver_1, current_team.driver_2, current_team.gear_level, current_team.use_boost)
 			try {
 				const race_result = await wax.api.transact ({
 					actions: tx }, {
