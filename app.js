@@ -94,10 +94,10 @@ async function doLog (s) {
 
 
 async function addRacers() {
-	// if (!wax.api) {
-	// 	doLog ('Racing error: ' + 'login first');
-	// 	return;
-	// }
+	if (!wax.api) {
+		doLog ('Racing error: ' + 'login first');
+		return;
+	}
 	const assets = document.getElementById("asset-ids").value;
 	const asset_array = assets.split(',')
 	const asset_ids = asset_array.map(str => parseInt(str.trim()));
