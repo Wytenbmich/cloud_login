@@ -284,7 +284,7 @@ function getFees(gear_level, rank) {
 			commision_amount = (VET_MASTER_GAS_COST[gear_level] * 0.03 + 10).toString() + " SNAKVEN"
 			break;
 	}
-	return [pay_amount, commision_amount]
+	return [commision_amount, pay_amount]
 }
 
 function updateRacequeue() {
