@@ -221,12 +221,11 @@ async function startRacing() {
 	while (racesStarted) {
 		doLog("Starting next race")
 		if(racingTeamQueue.isEmpty()) {
-			await delay (100 + (getRandomInt(1, 1000)));
+			await delay (100 + (getRandomInt(1, 6000)));
 		} else {
 			// Takes team from start of que
 			current_team = racingTeamQueue.dequeue()
 			// Adds team to end of the que
-			racingTeamQueue.enqueue(current_team)
 			const [commision_amount, pay_amount] = getFees(current_team.gear_level, current_team.rank)
 			tx = getTransactions(commision_amount, pay_amount, current_team.vech_1, current_team.driver_1, current_team.driver_2, current_team.gear_level, current_team.use_boost)
 			try {
@@ -244,20 +243,22 @@ async function startRacing() {
 					doLog ('Race Successfull')
 					document.getElementById("race-count").innerHTML = count
 					if(count%15 == 0) {
-						doLog ('Reached 15 races waiting 3 minutes....');
-						await delay (180000 + (getRandomInt(1, 5500)));
+						doLog ('Reached 15 races waiting 5 minutes....');
+						await delay (300000 + (getRandomInt(1, 5500)));
 					}
 				} catch (e) {
 					doLog ('Racing: ' + e.message);
 				}
-				updateRacequeue()
+				
 
 				await delay (1000 + (getRandomInt(1, 500)));
 				} catch (e) {
 						doLog ('Racing: ' + e.message);
-						doLog ('Waiting 30 seconds....');
-						await delay (30000 + (getRandomInt(1, 500)));
-				}			
+						doLog ('Waiting 45 seconds....');
+						await delay (45000 + (getRandomInt(1, 500)));
+				}
+				racingTeamQueue.enqueue(current_team)
+				updateRacequeue()			
 		}	
 	}
 }
