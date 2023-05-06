@@ -249,7 +249,7 @@ async function startRacing() {
 				} catch (e) {
 					doLog ('Racing: ' + e.message);
 				}
-				updateRacequeue()
+				
 
 				await delay (1000 + (getRandomInt(1, 500)));
 				} catch (e) {
@@ -257,7 +257,8 @@ async function startRacing() {
 						doLog ('Waiting 30 seconds....');
 						await delay (30000 + (getRandomInt(1, 500)));
 				}
-				racingTeamQueue.enqueue(current_team)			
+				racingTeamQueue.enqueue(current_team)
+				updateRacequeue()			
 		}	
 	}
 }
