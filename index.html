@@ -39,20 +39,37 @@
 
       <label>
         <input type="checkbox" id="use-boost" value="false">
-        Use boost
+        Use boost - <span class="note">burn manually via atomic hub</span>    
       </label>
+      <br>
       <br>
 
       <label for="asset-ids">Asset Ids:</label><br>
       <textarea id="asset-ids" name="assets" rows="4" placeholder="vehicle_id, driver_1_id, driver_2_id: eg. 12341233, 421341, 123412"></textarea>
-      <div class="note">
-        Note: <br>
+      
+        <span style="font-weight: bold; font-size: 13px;"> Note:</span> <br>
+        <div class="note">
         Autoracer takes a small fee of 3% + 10 fuel of the fuel cost per transaction.
       </div>
     </form>
-    <button id="race" onclick="race()">Race!</button>
+    <button id="race" onclick="addRacers()">Race!</button>
+    <!-- Button to open the modal -->
+    <button onclick="openModal()">Open Modal</button>
     <pre id="response"></pre>
-    Race Count: <span id="race-count">0</span>
+    <span style="font-weight: bold;">Race Count:</span> <span id="race-count">0</span>
+    <br>
+    <span style="font-weight: bold;"> next racer: </span><span class="next-racer">queue some racers!</span>
+    <!-- The modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+          <div class="race-queue-body">
+            <span style="font-weight: bold;"> next racer: </span><span class="next-racer">queue some racers!</span>
+            <div id="race-queue" class="race-queue"></div>
+        </div>
+      </div>
+    </div>
   </div>
   <script src="waxjs.js"></script>
   <script src="app.js"></script>
