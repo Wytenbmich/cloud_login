@@ -226,7 +226,6 @@ async function startRacing() {
 			// Takes team from start of que
 			current_team = racingTeamQueue.dequeue()
 			// Adds team to end of the que
-			racingTeamQueue.enqueue(current_team)
 			const [commision_amount, pay_amount] = getFees(current_team.gear_level, current_team.rank)
 			tx = getTransactions(commision_amount, pay_amount, current_team.vech_1, current_team.driver_1, current_team.driver_2, current_team.gear_level, current_team.use_boost)
 			try {
@@ -257,7 +256,8 @@ async function startRacing() {
 						doLog ('Racing: ' + e.message);
 						doLog ('Waiting 30 seconds....');
 						await delay (30000 + (getRandomInt(1, 500)));
-				}			
+				}
+				racingTeamQueue.enqueue(current_team)			
 		}	
 	}
 }
