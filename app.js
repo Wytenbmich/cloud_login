@@ -45,8 +45,16 @@ const urlWax = 'https://wax.cryptolions.io';
 const wax = new waxjs.WaxJS ({rpcEndpoint: urlWax});
 let lineCount = 0;
 let racesStarted = false;
-const racingTeamQueue = new RacingTeamQueue();
+var racingTeamQueue = new RacingTeamQueue();
 const error_count = 0;
+
+window.onload = function() {
+	console.log("Attempting to load queue...")
+	racingTeamQueue = getQueue()
+	console.log(racingTeamQueue)
+	updateQueueSize()
+	updateRacequeue()
+  }
 
 const delay = msecs => new Promise ((resolve, reject) => {
 	setTimeout (_ => resolve (), msecs)
@@ -102,13 +110,11 @@ async function addRacers() {
 	const assets = document.getElementById("asset-ids").value;
 	const asset_array = assets.split(',')
 	const asset_ids = asset_array.map(str => parseInt(str.trim()));
-	console.log(asset_ids)
 	for (let i = 0; i < asset_ids.length; i += 3) {
 		const vech_1 = asset_ids[i];
 		const driver_1 = asset_ids[i + 1];
 		const driver_2 = asset_ids[i + 2];
 		const gear_level = document.getElementById("gear-selector").value;
-		console.log(gear_level)
 		const boost = document.getElementById("use-boost");
 		let use_boost = false
 		if (boost.checked) {
@@ -236,9 +242,7 @@ async function startRacing() {
 					blocksBehind: 60,
 					expireSeconds: 300
 				});
-				console.log(race_result)
 				try {
-					console.log(race_result['transaction_id'])
 					count += 1
 					current_team.race_count += 1
 					doLog ('Race Successfull')
@@ -255,13 +259,16 @@ async function startRacing() {
 				await delay (1000 + (getRandomInt(1, 500)));
 				} catch (e) {
 						doLog ('Racing: ' + e.message);
-						doLog ('Waiting 45 seconds....');
+
 						if (e == "assertion failure with message: the vehicle is already being used" || e == `assertion failure with message: vehicle asset id ${current_team.vech_1} has exhausted its free races for today.`) {
-							if (error_count%5 ==0) {
+							if (error_count%5==0 && error_count!=0) {
+								doLog ('Waiting 45 seconds....');
 								await delay (45000 + (getRandomInt(1, 1500)));
 							}
+							doLog ('Waiting 5 seconds....');
 							await delay (500 + (getRandomInt(1, 500)));
 						} else  {
+							doLog ('Waiting 45 seconds....');
 							await delay (45000 + (getRandomInt(1, 1500)));
 						}
 				}
@@ -300,7 +307,6 @@ function updateRacequeue() {
 	race_queue = document.getElementById ('race-queue');
 	race_queue.textContent = ""
 	team_number = 1
-	console.log(teams)
 	let next_racer = document.querySelectorAll('.next-racer');
 	if (teams.length > 0) {
 		next_racer.forEach(element => {
@@ -355,4 +361,33 @@ function clearQueue() {
 
 function updateQueueSize() {
 	document.getElementById ('queue-size').textContent = racingTeamQueue.size();
+}
+
+function saveQueue() {
+	doLog('Saving Queue...')
+	// Serialize the queue using JSON.stringify
+	const serializedQueue = JSON.stringify(racingTeamQueue.getAllTeams());
+	console.log(serializedQueue)
+	// Set the new cookie with the serialized queue and an expiration date
+	document.cookie = `racingTeamQueue=${serializedQueue}; expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/`;
+  }
+
+function getQueue() {
+	doLog('Retrieving Queue...')
+	// Get the cookie value for "racingTeamQueue"
+	const cookies = document.cookie.split(';');
+	const queueCookie = cookies.find(cookie => cookie.trim().startsWith('racingTeamQueue='));
+
+	// If the cookie exists, parse the queue and return it
+	if (queueCookie) {
+		const serializedQueue = queueCookie.split('=')[1];
+		const deserializedQueue = JSON.parse(serializedQueue);
+		const queue = new RacingTeamQueue();
+		deserializedQueue.forEach(team => queue.enqueue(team));
+		console.log(queue)
+		return queue;
+	}
+	
+	// If the cookie doesn't exist, return a new empty queue
+	return new RacingTeamQueue();
 }
