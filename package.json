@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@waxio/waxjs": "^1.4.2"
+    "@waxio/waxjs": "^1.5.0"
   }
 }
