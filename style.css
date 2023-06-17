@@ -18,20 +18,24 @@ h1 {
 button {
   padding: 0.5em;
   font-size: 1.2em;
-  background-color: #2ba52d;
+  background-color: rgb(133, 73, 182);
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 9px;
   cursor: pointer;
   text-transform: lowercase;
   margin: 5px;
 }
 .button-stop:hover {
-  background-color: rgb(209, 82, 82);
+  background-color: rgb(216, 212, 252);
+  border: solid 1px rgb(133, 73, 182);
+  color :rgb(133, 73, 182);
 }
 
 button:hover {
-  background-color: #1bba1f;
+  background-color: rgb(216, 212, 252);
+  border: solid 1px rgb(133, 73, 182);
+  color :rgb(133, 73, 182);
 }
 
 .form-group {
